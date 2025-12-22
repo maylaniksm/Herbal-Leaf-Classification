@@ -4,9 +4,6 @@ import numpy as np
 import json
 import os
 from PIL import Image
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input as mobilenet_preprocess
-from tensorflow.keras.applications.resnet50 import preprocess_input as resnet_preprocess
-from tensorflow.keras.applications.vgg16 import preprocess_input as vgg_preprocess
 
 # =====================================================
 # PAGE CONFIG
@@ -98,23 +95,21 @@ st.sidebar.markdown(
 # =====================================================
 # PREPROCESS FUNCTION
 # =====================================================
-def preprocess_image(img, model_key):
+def preprocess_image(img, model_name):
+    # 1. Resize gambar ke 224x224 (sama seperti di Colab)
     img = img.resize((224, 224))
     img_array = np.array(img)
 
+    # 2. Pastikan hanya 3 channel (RGB)
     if img_array.shape[-1] == 4:
         img_array = img_array[..., :3]
 
-    img_array = np.expand_dims(img_array, axis=0)
+    # 3. Normalisasi: WAJIB bagi 255 (Sesuai kode Colab kamu)
+    # Ini akan memperbaiki masalah Confidence 100%
+    img_array = img_array.astype('float32') / 255.0
 
-    if model_key == "MobileNetV2":
-        img_array = mobilenet_preprocess(img_array)
-    elif model_key == "ResNet50":
-        img_array = resnet_preprocess(img_array)
-    elif model_key == "VGG16":
-        img_array = vgg_preprocess(img_array)
-    else:  # CNN Manual
-        img_array = img_array / 255.0
+    # 4. Tambah dimensi batch (1, 224, 224, 3)
+    img_array = np.expand_dims(img_array, axis=0)
 
     return img_array
 
