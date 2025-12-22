@@ -1,5 +1,10 @@
 streamlit==1.36.0
-tensorflow==2.15.0
+
+tensorflow-cpu==2.15.0
 keras==2.15.0
-numpy
+
+protobuf<4
+h5py<4
+
+numpy==1.26.4
 pillow
