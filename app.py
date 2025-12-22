@@ -44,25 +44,29 @@ class_names = load_class_names()
 # =====================================================
 @st.cache_resource
 def load_specific_model(model_key):
-    # Mapping path model
     model_paths = {
         "CNN Manual": "model/cnn_leaf_model.keras",
         "MobileNetV2": "model/mobilenetv2_leaf_model.keras",
         "ResNet50": "model/resnet50_leaf_model.keras",
         "VGG16": "model/vgg16_leaf_model.keras"
     }
-    
     path = model_paths[model_key]
     
     if not os.path.exists(path):
-        st.error(f"File model {path} tidak ditemukan!")
+        st.error(f"File {path} tidak ditemukan!")
         return None
 
-    # Bersihkan session lama untuk menghemat RAM sebelum load model baru
+    # Membersihkan sisa memori
     tf.keras.backend.clear_session()
-    
-    # Load model
-    return tf.keras.models.load_model(path, compile=False)
+
+    try:
+        # Menambahkan custom_objects jika ada layer kustom, 
+        # tapi yang paling penting adalah compile=False
+        return tf.keras.models.load_model(path, compile=False)
+    except Exception as e:
+        # Jika load_model standar gagal (ValueError), kita coba cara alternatif
+        st.warning(f"Percobaan load pertama gagal, mencoba metode alternatif untuk {model_key}...")
+        return tf.keras.models.load_model(path, compile=False, safe_mode=False)
 
 # =====================================================
 # SIDEBAR
@@ -95,22 +99,19 @@ st.sidebar.markdown(
 # =====================================================
 # PREPROCESS FUNCTION
 # =====================================================
-def preprocess_image(img, model_name):
-    # 1. Resize gambar ke 224x224 (sama seperti di Colab)
+def preprocess_image(img):
     img = img.resize((224, 224))
-    img_array = np.array(img)
-
-    # 2. Pastikan hanya 3 channel (RGB)
+    img_array = np.array(img).astype('float32') # Pastikan float32 di sini
+    
     if img_array.shape[-1] == 4:
         img_array = img_array[..., :3]
 
-    # 3. Normalisasi: WAJIB bagi 255 (Sesuai kode Colab kamu)
-    # Ini akan memperbaiki masalah Confidence 100%
-    img_array = img_array.astype('float32') / 255.0
+    # NORMALISASI (Sesuai Colab: 1/255)
+    img_array = img_array / 255.0
 
-    # 4. Tambah dimensi batch (1, 224, 224, 3)
-    img_array = np.expand_dims(img_array, axis=0)
-
+    # Pastikan dimensinya (1, 224, 224, 3)
+    img_array = np.reshape(img_array, (1, 224, 224, 3))
+    
     return img_array
 
 # =====================================================
