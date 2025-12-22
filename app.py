@@ -56,17 +56,17 @@ def load_specific_model(model_key):
         st.error(f"File {path} tidak ditemukan!")
         return None
 
-    # Membersihkan sisa memori
     tf.keras.backend.clear_session()
-
+    
+    # Gunakan try-except yang lebih agresif
     try:
-        # Menambahkan custom_objects jika ada layer kustom, 
-        # tapi yang paling penting adalah compile=False
+        # Tambahkan custom_objects={} jika kosong
         return tf.keras.models.load_model(path, compile=False)
-    except Exception as e:
-        # Jika load_model standar gagal (ValueError), kita coba cara alternatif
-        st.warning(f"Percobaan load pertama gagal, mencoba metode alternatif untuk {model_key}...")
-        return tf.keras.models.load_model(path, compile=False, safe_mode=False)
+    except ValueError:
+        # Jika ValueError (Input Compatibility), kita paksa Keras memuatnya
+        # lewat API fungsional jika Sequential gagal
+        import keras
+        return keras.saving.load_model(path, compile=False)
 
 # =====================================================
 # SIDEBAR
