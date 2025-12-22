@@ -4,9 +4,6 @@ import numpy as np
 import json
 import os
 from PIL import Image
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input as mobilenet_preprocess
-from tensorflow.keras.applications.resnet50 import preprocess_input as resnet_preprocess
-from tensorflow.keras.applications.vgg16 import preprocess_input as vgg_preprocess
 
 # =====================================================
 # PAGE CONFIG
@@ -47,25 +44,29 @@ class_names = load_class_names()
 # =====================================================
 @st.cache_resource
 def load_specific_model(model_key):
-    # Mapping path model
     model_paths = {
         "CNN Manual": "model/cnn_leaf_model.keras",
         "MobileNetV2": "model/mobilenetv2_leaf_model.keras",
         "ResNet50": "model/resnet50_leaf_model.keras",
         "VGG16": "model/vgg16_leaf_model.keras"
     }
-    
     path = model_paths[model_key]
     
     if not os.path.exists(path):
-        st.error(f"File model {path} tidak ditemukan!")
+        st.error(f"File {path} tidak ditemukan!")
         return None
 
-    # Bersihkan session lama untuk menghemat RAM sebelum load model baru
     tf.keras.backend.clear_session()
     
-    # Load model
-    return tf.keras.models.load_model(path, compile=False)
+    # Gunakan try-except yang lebih agresif
+    try:
+        # Tambahkan custom_objects={} jika kosong
+        return tf.keras.models.load_model(path, compile=False)
+    except ValueError:
+        # Jika ValueError (Input Compatibility), kita paksa Keras memuatnya
+        # lewat API fungsional jika Sequential gagal
+        import keras
+        return keras.saving.load_model(path, compile=False)
 
 # =====================================================
 # SIDEBAR
@@ -98,24 +99,19 @@ st.sidebar.markdown(
 # =====================================================
 # PREPROCESS FUNCTION
 # =====================================================
-def preprocess_image(img, model_key):
+def preprocess_image(img):
     img = img.resize((224, 224))
-    img_array = np.array(img)
-
+    img_array = np.array(img).astype('float32') # Pastikan float32 di sini
+    
     if img_array.shape[-1] == 4:
         img_array = img_array[..., :3]
 
-    img_array = np.expand_dims(img_array, axis=0)
+    # NORMALISASI (Sesuai Colab: 1/255)
+    img_array = img_array / 255.0
 
-    if model_key == "MobileNetV2":
-        img_array = mobilenet_preprocess(img_array)
-    elif model_key == "ResNet50":
-        img_array = resnet_preprocess(img_array)
-    elif model_key == "VGG16":
-        img_array = vgg_preprocess(img_array)
-    else:  # CNN Manual
-        img_array = img_array / 255.0
-
+    # Pastikan dimensinya (1, 224, 224, 3)
+    img_array = np.reshape(img_array, (1, 224, 224, 3))
+    
     return img_array
 
 # =====================================================
