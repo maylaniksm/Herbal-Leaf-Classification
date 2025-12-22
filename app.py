@@ -43,10 +43,18 @@ with open("model/class_names.json", "r") as f:
 @st.cache_resource
 def load_models():
     return {
-        "CNN Manual": tf.keras.models.load_model("model/cnn_leaf_model.keras"),
-        "MobileNetV2": tf.keras.models.load_model("model/mobilenetv2_leaf_model.keras"),
-        "ResNet50": tf.keras.models.load_model("model/resnet50_leaf_model.keras"),
-        "VGG16": tf.keras.models.load_model("model/vgg16_leaf_model.keras"),
+        "CNN Manual": tf.keras.models.load_model(
+            "model/cnn_leaf_model.keras", compile=False
+        ),
+        "MobileNetV2": tf.keras.models.load_model(
+            "model/mobilenetv2_leaf_model.keras", compile=False
+        ),
+        "ResNet50": tf.keras.models.load_model(
+            "model/resnet50_leaf_model.keras", compile=False
+        ),
+        "VGG16": tf.keras.models.load_model(
+            "model/vgg16_leaf_model.keras", compile=False
+        ),
     }
 
 models = load_models()
