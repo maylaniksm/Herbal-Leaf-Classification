@@ -147,7 +147,7 @@ if uploaded_file is not None:
         if model is not None:
             with st.spinner(f"Menggunakan {model_name} untuk inferensi..."):
                 # Preprocessing
-                processed_img = preprocess_image(image, model_name)
+                processed_img = preprocess_image(image)
                 
                 # Predict
                 preds = model.predict(processed_img)
