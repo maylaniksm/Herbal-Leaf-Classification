@@ -3,15 +3,16 @@ import tensorflow as tf
 import numpy as np
 import json
 import os
+import pandas as pd
 from PIL import Image
 
 # =====================================================
 # PAGE CONFIG
 # =====================================================
 st.set_page_config(
-    page_title="Leaf Disease Classification",
+    page_title="Leaf Disease Multi-Model Comparison",
     page_icon="🍃",
-    layout="centered",
+    layout="wide", # Diubah ke wide agar perbandingan kolom lebih enak dilihat
     initial_sidebar_state="expanded"
 )
 
@@ -20,9 +21,9 @@ st.set_page_config(
 # =====================================================
 st.markdown(
     """
-    <h1 style="text-align:center;">🍃 Leaf Disease Classification</h1>
+    <h1 style="text-align:center;">🍃 Leaf Disease Classification System</h1>
     <p style="text-align:center; font-size:16px;">
-        Sistem Klasifikasi Penyakit Daun Menggunakan Deep Learning
+        Bandingkan hasil prediksi dari berbagai arsitektur Deep Learning secara real-time.
     </p>
     <hr>
     """,
@@ -40,9 +41,8 @@ def load_class_names():
 class_names = load_class_names()
 
 # =====================================================
-# LOAD MODELS (LAZY LOADING - EFISIEN RAM)
+# LOAD MODELS (OPTIMIZED FOR COMPARISON)
 # =====================================================
-@st.cache_resource
 def load_specific_model(model_key):
     model_paths = {
         "CNN Manual": "model/cnn_leaf_model.keras",
@@ -53,139 +53,94 @@ def load_specific_model(model_key):
     path = model_paths[model_key]
     
     if not os.path.exists(path):
-        st.error(f"File {path} tidak ditemukan!")
         return None
 
+    # Membersihkan session sebelumnya agar RAM tidak penuh
     tf.keras.backend.clear_session()
     
-    # Gunakan try-except yang lebih agresif
     try:
-        # Tambahkan custom_objects={} jika kosong
         return tf.keras.models.load_model(path, compile=False)
-    except ValueError:
-        # Jika ValueError (Input Compatibility), kita paksa Keras memuatnya
-        # lewat API fungsional jika Sequential gagal
+    except Exception:
         import keras
         return keras.saving.load_model(path, compile=False)
-
-# =====================================================
-# SIDEBAR
-# =====================================================
-st.sidebar.markdown("## ⚙️ Konfigurasi Model")
-st.sidebar.info(
-    "Pilih arsitektur model deep learning yang akan digunakan."
-)
-
-# User memilih nama model
-model_name = st.sidebar.selectbox(
-    "Model Deep Learning",
-    ["CNN Manual", "MobileNetV2", "ResNet50", "VGG16"]
-)
-
-# Proses Loading Model hanya yang dipilih
-with st.sidebar:
-    with st.spinner(f"Loading {model_name}..."):
-        model = load_specific_model(model_name)
-
-st.sidebar.markdown("---")
-st.sidebar.markdown(
-    """
-    **Catatan Akademik** - Dataset sama untuk semua model  
-    - Model menggunakan pre-trained ImageNet  
-    - Output berupa confidence score
-    """
-)
 
 # =====================================================
 # PREPROCESS FUNCTION
 # =====================================================
 def preprocess_image(img):
+    img = img.convert("RGB")
     img = img.resize((224, 224))
-    img_array = np.array(img).astype('float32') # Pastikan float32 di sini
-    
-    if img_array.shape[-1] == 4:
-        img_array = img_array[..., :3]
-
-    # NORMALISASI (Sesuai Colab: 1/255)
-    img_array = img_array / 255.0
-
-    # Pastikan dimensinya (1, 224, 224, 3)
-    img_array = np.reshape(img_array, (1, 224, 224, 3))
-    
+    img_array = np.array(img).astype('float32') / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
     return img_array
+
+# =====================================================
+# SIDEBAR & UPLOAD
+# =====================================================
+st.sidebar.image("https://cdn-icons-png.flaticon.com/512/892/892926.png", width=100)
+st.sidebar.markdown("## 📤 Upload Center")
+
+# Fitur Batch Upload
+uploaded_files = st.sidebar.file_uploader(
+    "Pilih satu atau beberapa gambar",
+    type=["jpg", "jpeg", "png"],
+    accept_multiple_files=True
+)
+
+st.sidebar.info(f"Terdeteksi: {len(uploaded_files)} gambar")
 
 # =====================================================
 # MAIN CONTENT
 # =====================================================
-st.markdown("### 📤 Upload Gambar Daun")
-st.write(
-    "Unggah gambar daun tanaman dalam format **JPG / PNG**."
-)
+if not uploaded_files:
+    st.info("Silakan unggah gambar daun di sidebar untuk memulai analisis.")
+else:
+    # List model yang akan dijalankan
+    model_list = ["CNN Manual", "MobileNetV2", "ResNet50", "VGG16"]
 
-uploaded_file = st.file_uploader(
-    "Upload Image",
-    type=["jpg", "jpeg", "png"],
-    label_visibility="collapsed"
-)
-
-# =====================================================
-# PREDICTION LOGIC
-# =====================================================
-if uploaded_file is not None:
-    image = Image.open(uploaded_file).convert("RGB")
-
-    st.markdown("### 🖼️ Preview Gambar")
-    st.image(image, use_column_width=True)
-
-    st.markdown("---")
-
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-        predict_btn = st.button("🔍 Lakukan Prediksi", use_container_width=True)
-
-    if predict_btn:
-        if model is not None:
-            with st.spinner(f"Menggunakan {model_name} untuk inferensi..."):
-                # Preprocessing
-                processed_img = preprocess_image(image)
-                
-                # Predict
-                preds = model.predict(processed_img)
-                confidence = float(np.max(preds))
-                predicted_class = class_names[int(np.argmax(preds))]
-
-                st.success("Prediksi berhasil dilakukan")
-
-                st.markdown("### 🧠 Hasil Klasifikasi")
-                st.markdown(
-                    f"""
-                    <div style="
-                        background-color:#f9f9f9;
-                        padding:20px;
-                        border-radius:10px;
-                        border-left:5px solid #2ecc71;
-                    ">
-                        <p><b>Model</b> : {model_name}</p>
-                        <p><b>Predicted Class</b> : {predicted_class}</p>
-                        <p><b>Confidence Score</b> : {confidence*100:.2f}%</p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-        else:
-            st.error("Model gagal dimuat. Periksa log atau file model Anda.")
+    # Loop setiap gambar yang di-upload
+    for i, uploaded_file in enumerate(uploaded_files):
+        image = Image.open(uploaded_file)
+        
+        with st.expander(f"🖼️ Analisis Gambar: {uploaded_file.name}", expanded=True):
+            col_img, col_info = st.columns([1, 2])
+            
+            with col_img:
+                st.image(image, caption="Original Image", use_container_width=True)
+            
+            with col_info:
+                st.write("### Perbandingan Model")
+                if st.button(f"🔍 Jalankan Semua Model ({uploaded_file.name})", key=f"btn_{i}"):
+                    processed_img = preprocess_image(image)
+                    
+                    # Layout kolom untuk hasil
+                    res_cols = st.columns(len(model_list))
+                    
+                    for idx, m_name in enumerate(model_list):
+                        with st.spinner(f"Running {m_name}..."):
+                            model = load_specific_model(m_name)
+                            
+                            if model is not None:
+                                preds = model.predict(processed_img, verbose=0)
+                                confidence = float(np.max(preds))
+                                predicted_class = class_names[int(np.argmax(preds))]
+                                
+                                # Tampilan Card Hasil
+                                color = "#2ecc71" if confidence > 0.8 else "#f1c40f"
+                                with res_cols[idx]:
+                                    st.markdown(f"""
+                                        <div style="border:1px solid #ddd; padding:10px; border-radius:10px; text-align:center; border-top: 5px solid {color};">
+                                            <small>{m_name}</small><br>
+                                            <b style="font-size:14px;">{predicted_class}</b><br>
+                                            <h3 style="color:{color}; margin:0;">{confidence*100:.1f}%</h3>
+                                        </div>
+                                    """, unsafe_allow_html=True)
+                            else:
+                                with res_cols[idx]:
+                                    st.error(f"{m_name} Fail")
 
 # =====================================================
 # FOOTER
 # =====================================================
-st.markdown(
-    """
-    <hr>
-    <p style="text-align:center; font-size:13px; color:gray;">
-        © 2025 | Leaf Disease Classification System  
-        <br>
-        Deep Learning – CNN, MobileNetV2, ResNet50, VGG16
-    </p>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("<br><hr>", unsafe_allow_html=True)
+st.caption("© 2025 Leaf Disease System | Academic Comparison Mode | Built with Keras 3")
