@@ -1,0 +1,21 @@
+[project]
+name = "Ujian-Akhir-Praktikum"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Maylani Wardhani", email = "maylaniwardhani@gmail.com"},
+]
+dependencies = [
+    "streamlit",
+    "tensorflow==2.19.0",
+    "keras==3.10.0",
+    "numpy",
+    "pillow",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
