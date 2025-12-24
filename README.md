@@ -184,7 +184,7 @@ Dataset ini mencakup 10 kelas daun herbal berikut:
 
 <ul>
   <li>
-    <b>Data Augmentation</b>: Untuk memenuhi kebutuhan jumlah data dan meningkatkan kemampuan generalisasi model, dilakukan proses augmentasi citra menggunakan teknik rotasi, pergeseran (width & height shift), zoom, shear, dan horizontal flip. Proses ini memperluas dataset hingga lebih dari <b>5.500 citra</b>.
+    <b>Data Augmentation</b>: Untuk memenuhi kebutuhan jumlah data dan meningkatkan kemampuan generalisasi model, dilakukan proses augmentasi citra menggunakan teknik rotasi, pergeseran (width & height shift), zoom, shear, dan horizontal flip. Proses ini memperluas dataset hingga <b>5.500 citra</b>.
   </li>
   <br>
 
@@ -221,7 +221,7 @@ Proses utama pada tahap preprocessing meliputi:
 
 <ul>
   <li>
-    <b>Data Augmentation</b>: Untuk meningkatkan jumlah data dan memperkaya variasi citra, diterapkan teknik augmentasi seperti rotasi, pergeseran horizontal dan vertikal, zoom, shear, dan horizontal flip. Proses ini dilakukan secara <i>offline</i> hingga jumlah dataset mencapai lebih dari 5.500 citra.
+    <b>Data Augmentation</b>: Untuk meningkatkan jumlah data dan memperkaya variasi citra, diterapkan teknik augmentasi seperti rotasi, pergeseran horizontal dan vertikal, zoom, shear, dan horizontal flip. Proses ini dilakukan secara <i>offline</i> hingga jumlah dataset mencapai 5.500 citra.
   </li>
   <br>
 
