@@ -342,6 +342,9 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
       <b>MobileNetV2</b><br>
       <img src="assets/images/Confusion_Matrix_MobileNetV2.png" width="350px">
     </td>
+  </tr>
+
+  <tr>
     <td align="center">
       <b>VGG16</b><br>
       <img src="assets/images/Confusion_Matrix_ResNet50.png" width="350px">
@@ -366,6 +369,9 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
       <b>MobileNetV2 Learning Curve</b><br>
       <img src="assets/images/Grafik_MobileNetV2.png" width="350px">
     </td>
+  </tr>
+
+  <tr>
     <td align="center" colspan="2">
       <b>ResNet50 Learning Curve</b><br>
       <img src="assets/images/Grafik_ResNet50.png" width="350px">
@@ -403,7 +409,7 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
 
 <p align="center">
   <strong>Live Demo:</strong> 
-  <a href="https://herbal-leaf-classification.streamlit.app/">alzheimer-brain-mri-classification.streamlit.app</a>
+  <a href="https://herbal-leaf-classification.streamlit.app/">herbal-leaf-classification.streamlit.app</a>
 </p>
 
 <p align="center">
