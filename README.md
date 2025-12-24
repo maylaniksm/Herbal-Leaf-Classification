@@ -26,7 +26,7 @@ Proyek ini berfokus pada pengembangan sistem klasifikasi citra otomatis untuk me
 
 Dataset yang digunakan dalam penelitian ini adalah <b>Indonesian Herb Leaf Dataset 3500</b> yang diperoleh dari Mendeley Data. Dataset ini berisi ribuan citra daun herbal yang diambil dalam berbagai kondisi pencahayaan dan sudut pandang, sehingga menantang model untuk belajar fitur visual yang representatif.
 
-Untuk memenuhi kebutuhan jumlah data pada Ujian Akhir Praktikum (UAP) dan meningkatkan kemampuan generalisasi model, dilakukan proses <i>data augmentation</i> seperti rotasi, pergeseran, zoom, shear, dan flip horizontal. Setelah proses augmentasi, total dataset diperluas hingga lebih dari 5.500 citra dan kemudian dibagi ke dalam data latih, validasi, dan uji.
+Untuk memenuhi kebutuhan jumlah data pada Ujian Akhir Praktikum (UAP) dan meningkatkan kemampuan generalisasi model, dilakukan proses <i>data augmentation</i> seperti rotasi, pergeseran, zoom, shear, dan flip horizontal. Setelah proses augmentasi, total dataset diperluas hingga 5.500 citra dan kemudian dibagi ke dalam data latih, validasi, dan uji.
 
 Model dilatih untuk mengklasifikasikan citra daun ke dalam 10 kelas tanaman herbal berikut:
 
