@@ -78,54 +78,136 @@ Melalui perbandingan keempat model ini, proyek ini bertujuan untuk menganalisis 
 
 ---
 
-<h1 id="latar-belakang" align="center">🧠 Latar Belakang 🧠</h1>
+<h1 id="latar-belakang" align="center">🌿 Latar Belakang 🌿</h1>
 
-Penyakit Alzheimer merupakan gangguan neurodegeneratif progresif yang menjadi penyebab paling umum dari demensia di seluruh dunia. Penyakit ini menyebabkan penyusutan sel otak secara bertahap (atrofi), yang berdampak pada penurunan daya ingat, kemampuan berpikir, hingga perubahan perilaku secara drastis.
-Tantangan utama dalam penanganan Alzheimer adalah gejalanya yang seringkali dianggap sebagai proses penuaan normal pada tahap awal (Very Mild Demented). Padahal, intervensi medis akan jauh lebih efektif jika dilakukan sebelum kerusakan otak meluas ke stadium lanjut (Moderate Demented).
-Penggunaan citra Magnetic Resonance Imaging (MRI) merupakan salah satu standar emas untuk melihat perubahan struktur otak. Namun, menganalisis ratusan scan MRI secara manual memerlukan ketelitian tinggi, waktu yang lama, dan keahlian spesialis radiologi yang terbatas jumlahnya.
+Indonesia merupakan negara dengan kekayaan hayati yang sangat melimpah, termasuk berbagai jenis tanaman herbal yang telah lama dimanfaatkan dalam pengobatan tradisional, industri pangan, dan kosmetik. Setiap tanaman herbal memiliki ciri khas daun yang berbeda, baik dari segi bentuk, tekstur, maupun pola warna, yang menjadi kunci utama dalam proses identifikasi.
 
-Proyek ini hadir untuk menjawab tantangan tersebut dengan memanfaatkan teknologi Deep Learning. Dengan menggunakan model Custom CNN, MobileNetV2, dan VGG16, sistem ini dikembangkan untuk:
+Namun, proses identifikasi daun herbal secara manual masih memiliki berbagai tantangan. Beberapa jenis daun memiliki kemiripan visual yang tinggi, sehingga rawan terjadi kesalahan klasifikasi, terutama bagi masyarakat awam atau praktisi non-ahli. Selain itu, faktor pencahayaan, sudut pengambilan gambar, dan kualitas citra juga dapat mempengaruhi ketepatan identifikasi secara visual.
 
-- Otomatisasi Skrining: Membantu tenaga medis dalam melakukan klasifikasi stadium Alzheimer secara cepat dan objektif.
-- Deteksi Dini: Mengidentifikasi pola halus pada citra MRI yang mungkin terlewatkan dalam observasi visual manual, terutama pada fase Very Mild.
-- Akurasi Diagnostik: Memberikan perbandingan performa antara arsitektur model konvensional dan Transfer Learning untuk mendapatkan hasil klasifikasi yang paling reliabel.
+Perkembangan teknologi Computer Vision dan Deep Learning membuka peluang untuk mengatasi permasalahan tersebut. Dengan memanfaatkan citra daun sebagai data masukan, model Convolutional Neural Network (CNN) mampu mengekstraksi fitur visual penting secara otomatis, seperti pola tulang daun, tekstur permukaan, dan karakteristik warna, yang sulit diukur secara manual.
 
-Melalui pendekatan ini, diharapkan proses pemantauan kesehatan saraf pasien dapat dilakukan secara lebih efisien, mendukung keputusan klinis yang lebih tepat, dan membantu perencanaan perawatan pasien dengan lebih baik.
+Dalam proyek ini, sistem klasifikasi daun herbal dikembangkan menggunakan pendekatan Deep Learning dengan memanfaatkan dataset <b>Indonesian Herb Leaf Dataset 3500</b>. Untuk meningkatkan jumlah data dan kemampuan generalisasi model, dilakukan proses data augmentation sehingga dataset memenuhi kebutuhan pelatihan model berskala besar.
+
+Proyek ini mengimplementasikan dan membandingkan beberapa arsitektur model, yaitu Custom CNN sebagai baseline, serta model Transfer Learning seperti MobileNetV2, ResNet50, dan VGG16, dengan tujuan untuk:
+
+<ul>
+  <li><b>Otomatisasi Identifikasi</b>: Membantu proses pengenalan jenis daun herbal secara cepat dan konsisten.</li>
+  <li><b>Mengurangi Kesalahan Manual</b>: Meminimalkan kesalahan identifikasi akibat kemiripan visual antar daun.</li>
+  <li><b>Evaluasi Arsitektur Model</b>: Menganalisis pengaruh kompleksitas model terhadap performa klasifikasi citra daun herbal.</li>
+</ul>
+
+Melalui pendekatan ini, diharapkan sistem klasifikasi daun herbal dapat menjadi dasar pengembangan aplikasi cerdas di bidang pertanian, kesehatan tradisional, dan edukasi, serta mendukung pelestarian dan pemanfaatan tanaman herbal Indonesia secara lebih optimal.
 
 ---
 
 <h1 id="tujuan-pengembangan" align="center">🎯 Tujuan Pengembangan 🎯</h1>
 
-- **Mengembangkan sistem klasifikasi citra MRI otak untuk mendeteksi penyakit Alzheimer secara otomatis ke dalam 4 kategori: Non Demented, Very Mild Demented, Mild Demented, dan Moderate Demented.**
-- **Mengevaluasi dan membandingkan performa tiga arsitektur Deep Learning, meliputi:**
-  - **Custom CNN**: Menguji efektivitas model yang dibangun dari awal dengan lapisan konvolusi mandiri.
-  - **MobileNetV2**: Menguji performa model pre-trained yang ringan dan efisien menggunakan teknik partial fine-tuning pada 20 layer terakhir.
-  - **VGG16**: Menguji kekuatan arsitektur yang lebih dalam dengan melakukan fine-tuning spesifik pada Block 4 dan Block 5 untuk menangkap detail tekstur otak yang kompleks.
-- **Mengoptimalkan akurasi model melalui teknik Transfer Learning dan Fine-Tuning, guna mengatasi keterbatasan data medis dan meningkatkan kemampuan generalisasi model terhadap data baru.**
-- **Menerapkan strategi pelatihan yang cerdas dengan menggunakan Callbacks seperti Early Stopping dan Learning Rate Reduction untuk mencegah overfitting dan memastikan konvergensi model yang stabil.**
-- **Menyediakan alat skrining awal (Decision Support System) yang dapat membantu tenaga medis dalam mendeteksi indikasi Alzheimer secara objektif, cepat, dan konsisten berdasarkan data citra digital.**
-- **Menentukan model terbaik (Best Model) berdasarkan metrik evaluasi seperti Akurasi, Loss, dan Confusion Matrix untuk digunakan sebagai standar dalam deteksi dini penyakit neurodegeneratif.**
+<ul>
+  <li>
+    <b>Mengembangkan sistem klasifikasi citra daun herbal Indonesia secara otomatis</b>
+    untuk mengenali dan mengelompokkan citra daun ke dalam 10 kelas tanaman herbal, yaitu:
+    Kemangi, Belimbing Wuluh, Jeruk Nipis, Nangka, Sirih, Lidah Buaya, Seledri, Jambu Biji,
+    Pandan, dan Pepaya.
+  </li>
+  <br>
+
+  <li>
+    <b>Mengevaluasi dan membandingkan performa beberapa arsitektur Deep Learning</b>,
+    meliputi:
+    <ul>
+      <li><b>Custom CNN</b>: Sebagai baseline model untuk mengukur kemampuan dasar CNN dalam mengekstraksi fitur visual daun.</li>
+      <li><b>MobileNetV2</b>: Model transfer learning yang ringan dan efisien untuk meningkatkan akurasi dengan biaya komputasi lebih rendah.</li>
+      <li><b>ResNet50</b>: Arsitektur deep residual network untuk mempelajari fitur kompleks pada pola daun.</li>
+      <li><b>VGG16</b>: Model CNN klasik yang dalam untuk menangkap detail tekstur dan struktur daun secara lebih mendalam.</li>
+    </ul>
+  </li>
+  <br>
+
+  <li>
+    <b>Meningkatkan performa klasifikasi melalui teknik Data Augmentation</b>
+    guna memperkaya variasi data latih dan meningkatkan kemampuan generalisasi model
+    terhadap citra daun dengan kondisi pencahayaan dan sudut pengambilan yang berbeda.
+  </li>
+  <br>
+
+  <li>
+    <b>Menerapkan teknik Transfer Learning</b> dengan memanfaatkan bobot pre-trained ImageNet
+    untuk mengatasi keterbatasan jumlah data dan mempercepat proses konvergensi pelatihan model.
+  </li>
+  <br>
+
+  <li>
+    <b>Mengimplementasikan strategi pelatihan yang optimal</b>
+    menggunakan callback seperti <i>Early Stopping</i> untuk mencegah overfitting
+    serta memastikan proses training berjalan stabil dan efisien.
+  </li>
+  <br>
+
+  <li>
+    <b>Menentukan model terbaik (Best Model)</b>
+    berdasarkan metrik evaluasi seperti Akurasi, Loss, Classification Report,
+    dan Confusion Matrix untuk digunakan sebagai acuan dalam sistem identifikasi daun herbal.
+  </li>
+  <br>
+
+  <li>
+    <b>Menyediakan dasar pengembangan sistem pendukung keputusan (Decision Support System)</b>
+    yang dapat dimanfaatkan dalam bidang pertanian, edukasi, dan pengenalan tanaman herbal
+    berbasis citra digital.
+  </li>
+</ul>
 
 ---
 
 <h1 id="sumber-dataset" align="center">📊 Sumber Dataset 📊</h1>
 
-Dataset yang digunakan dalam proyek ini adalah **Augmented Alzheimer MRI Dataset**, yang diperoleh dari platform Kaggle. Dataset ini terdiri dari citra medis MRI otak yang telah dikumpulkan dan diproses untuk membantu tugas klasifikasi penyakit neurodegeneratif.
+Dataset yang digunakan dalam proyek ini adalah <b>Indonesian Herb Leaf Dataset 3500</b> yang diperoleh dari platform Mendeley Data. Dataset ini berisi citra daun dari berbagai jenis tanaman herbal Indonesia yang dikumpulkan untuk mendukung penelitian di bidang pengolahan citra dan pengenalan tanaman berbasis kecerdasan buatan.
 
-Dataset ini mencakup 4 kelas tingkat keparahan Alzheimer:
+Dataset asli terdiri dari sekitar 3.500 citra daun yang terbagi ke dalam 10 kelas tanaman herbal, dengan variasi kondisi pencahayaan, sudut pengambilan gambar, serta karakteristik visual daun yang beragam.
 
-- **Non Demented**: Citra otak normal tanpa tanda-tanda atrofi yang signifikan.
-- **Very Mild Demented**: Tahap awal di mana gejala mulai muncul secara samar.
-- **Mild Demented**: Tahap ringan dengan pola penyusutan jaringan otak yang mulai terlihat jelas.
-- **Moderate Demented**: Tahap menengah dengan indikasi atrofi yang kuat pada area hipokampus dan korteks.
+Dataset ini mencakup 10 kelas daun herbal berikut:
 
-Detail Pemrosesan Dataset:
+<ul>
+  <li><b>Kemangi</b></li>
+  <li><b>Belimbing Wuluh</b></li>
+  <li><b>Jeruk Nipis</b></li>
+  <li><b>Nangka</b></li>
+  <li><b>Sirih</b></li>
+  <li><b>Lidah Buaya</b></li>
+  <li><b>Seledri</b></li>
+  <li><b>Jambu Biji</b></li>
+  <li><b>Pandan</b></li>
+  <li><b>Pepaya</b></li>
+</ul>
 
-- **Keseimbangan Data: Dataset telah melalui proses augmentation (penambahan data buatan) untuk memastikan setiap kelas memiliki jumlah sampel yang seimbang (1.250 citra per kelas dalam folder training), guna menghindari bias pada model.**
-- **Pre-processing: Citra diproses ke dalam format $224 \times 224$ piksel dan dilakukan normalisasi nilai pixel sesuai standar masing-masing arsitektur (VGG16 & MobileNetV2).**
-- **Pembagian Data: Dataset dibagi secara sistematis ke dalam tiga bagian: Train, Validation, dan Test.**
+<b>Detail Pemrosesan Dataset:</b>
 
-Link Original Dataset: [Augmented Alzheimer MRI Dataset (Kaggle)](https://www.kaggle.com/datasets/uraninjo/augmented-alzheimer-mri-dataset)
+<ul>
+  <li>
+    <b>Data Augmentation</b>: Untuk memenuhi kebutuhan jumlah data dan meningkatkan kemampuan generalisasi model, dilakukan proses augmentasi citra menggunakan teknik rotasi, pergeseran (width & height shift), zoom, shear, dan horizontal flip. Proses ini memperluas dataset hingga lebih dari <b>5.500 citra</b>.
+  </li>
+  <br>
+
+  <li>
+    <b>Pre-processing</b>: Seluruh citra diubah ukurannya menjadi <b>224 × 224 piksel</b> dan dilakukan normalisasi nilai piksel ke rentang [0,1] sebelum digunakan dalam proses pelatihan model.
+  </li>
+  <br>
+
+  <li>
+    <b>Pembagian Data</b>: Dataset hasil augmentasi dibagi ke dalam tiga subset, yaitu:
+    <ul>
+      <li><b>Training</b>: 80%</li>
+      <li><b>Validation</b>: 10%</li>
+      <li><b>Testing</b>: 10%</li>
+    </ul>
+    Pembagian dilakukan secara acak dan terpisah untuk setiap kelas guna menjaga proporsi data yang seimbang.
+  </li>
+</ul>
+
+<b>Link Dataset Asli:</b><br>
+<a href="https://data.mendeley.com/datasets/s82j8dh4rr/1" target="_blank">
+Indonesian Herb Leaf Dataset 3500 (Mendeley Data)
+</a>
 
 ---
 
@@ -133,44 +215,95 @@ Link Original Dataset: [Augmented Alzheimer MRI Dataset (Kaggle)](https://www.ka
 
 <h2 id="preprocessing-data" align="center">✨ Preprocessing Data ✨</h2>
 
-Tahap preprocessing dilakukan secara sistematis menggunakan pipeline tf.data untuk memastikan efisiensi memori dan kecepatan training. Seluruh citra MRI dimuat dengan ukuran 224×224 piksel dalam format warna RGB.
+Tahap preprocessing dilakukan secara sistematis menggunakan pipeline <i>tf.data</i> untuk memastikan efisiensi pemrosesan data dan stabilitas proses pelatihan model. Seluruh citra daun herbal dimuat dalam format RGB dan diubah ukurannya menjadi <b>224 × 224 piksel</b>, sesuai dengan kebutuhan arsitektur CNN modern dan model transfer learning berbasis ImageNet.
 
-Proses utama dalam tahap ini meliputi:
+Proses utama pada tahap preprocessing meliputi:
 
-- **Normalisasi Spesifik Model: Menggunakan fungsi preprocess_input yang berbeda untuk setiap arsitektur. MobileNetV2 memerlukan rentang piksel [-1, 1], sementara VGG16 menggunakan normalisasi berbasis mean ImageNet.**
-- **Data Augmentation: Untuk meningkatkan variasi data dan mencegah overfitting, diterapkan teknik rotasi acak (0.05), random zoom (0.05), serta penyesuaian kontras secara real-time pada data training.**
-- **Optimization: Dataset dioptimalkan menggunakan fungsi .cache() untuk mempercepat akses data dari memori dan .prefetch(tf.data.AUTOTUNE) agar proses penyiapan data tidak menghambat proses pelatihan model di GPU.**
-- **Dataset Splitting: Data dibagi menjadi tiga bagian (Train, Val, Test) untuk memastikan model diuji pada data yang belum pernah dilihat sebelumnya guna menjamin objektivitas hasil.**
+<ul>
+  <li>
+    <b>Data Augmentation</b>: Untuk meningkatkan jumlah data dan memperkaya variasi citra, diterapkan teknik augmentasi seperti rotasi, pergeseran horizontal dan vertikal, zoom, shear, dan horizontal flip. Proses ini dilakukan secara <i>offline</i> hingga jumlah dataset mencapai lebih dari 5.500 citra.
+  </li>
+  <br>
+
+  <li>
+    <b>Normalisasi Data</b>: Seluruh citra dinormalisasi ke rentang nilai [0,1] menggunakan layer <i>Rescaling(1./255)</i> agar mempercepat konvergensi dan menjaga kestabilan proses training.
+  </li>
+  <br>
+
+  <li>
+    <b>Dataset Splitting</b>: Dataset hasil augmentasi dibagi menjadi tiga subset, yaitu:
+    <ul>
+      <li><b>Training</b>: 80%</li>
+      <li><b>Validation</b>: 10%</li>
+      <li><b>Testing</b>: 10%</li>
+    </ul>
+    Pembagian dilakukan secara acak dan terpisah untuk setiap kelas agar distribusi data tetap seimbang.
+  </li>
+  <br>
+
+  <li>
+    <b>Pipeline Optimization</b>: Dataset dioptimalkan menggunakan fungsi <i>.cache()</i> dan <i>.prefetch(tf.data.AUTOTUNE)</i> untuk meningkatkan kecepatan akses data dan mencegah bottleneck saat pelatihan model.
+  </li>
+</ul>
 
 <h2 id="pemodelan" align="center">🤖 Pemodelan 🤖</h2>
 
-Penelitian ini menggunakan tiga pendekatan Deep Learning yang berbeda untuk membandingkan efektivitas antara arsitektur sederhana dengan arsitektur state-of-the-art berbasis Transfer Learning.
+Pada tahap pemodelan, penelitian ini membandingkan empat pendekatan arsitektur Deep Learning untuk mengklasifikasikan citra daun herbal Indonesia ke dalam 10 kelas. Model yang digunakan terdiri dari satu model CNN yang dibangun dari awal dan tiga model berbasis <i>Transfer Learning</i> dengan bobot pre-trained ImageNet.
 
-### 🟦 A. Custom CNN (Baseline)
-Model ini dibangun sebagai standar dasar untuk melihat seberapa baik jaringan saraf konvensional menangkap fitur MRI tanpa bantuan pre-trained weights.
+<h3>🟦 A. Custom CNN (Baseline Model)</h3>
 
-- **Arsitektur: 4 Blok Konvolusi dengan jumlah filter yang meningkat (32, 64, 128, 256).**
-- **Teknik Khusus: Penggunaan BatchNormalization setelah setiap layer konvolusi untuk menstabilkan proses training dan GlobalAveragePooling2D untuk efisiensi parameter.**
+Model Custom CNN digunakan sebagai baseline untuk mengevaluasi kemampuan dasar jaringan konvolusional dalam mengekstraksi fitur visual daun tanpa bantuan bobot pre-trained.
 
-### 🟨 B. MobileNetV2 (Efficient Transfer Learning)
-Dipilih karena keseimbangannya yang luar biasa antara kecepatan dan akurasi, sangat cocok untuk implementasi perangkat medis portabel.
+<ul>
+  <li><b>Arsitektur</b>: Terdiri dari tiga blok Conv2D dan MaxPooling dengan jumlah filter bertingkat (32, 64, 128).</li>
+  <li><b>Fully Connected Layer</b>: Dense 128 unit dengan aktivasi ReLU.</li>
+  <li><b>Regularisasi</b>: Dropout sebesar 0.3 untuk mengurangi risiko overfitting.</li>
+  <li><b>Output Layer</b>: Softmax dengan 10 neuron sesuai jumlah kelas daun herbal.</li>
+</ul>
 
-- **Partial Fine-Tuning: Membuka 20 layer terakhir untuk melatih ulang bobot agar lebih sensitif terhadap tekstur MRI Alzheimer.**
-- **Regularisasi: Menambahkan layer Dense (512 unit) dengan L2 Regularization dan Dropout(0.6) untuk menangani kompleksitas data.**
+<h3>🟨 B. MobileNetV2 (Transfer Learning)</h3>
 
-### 🟥 C. VGG16 (Advanced Fine-Tuning)
-Model ini digunakan untuk mengekstraksi fitur yang lebih mendalam melalui arsitektur yang sangat terstruktur.
+MobileNetV2 digunakan sebagai model transfer learning yang efisien dan ringan, cocok untuk klasifikasi citra dengan kebutuhan komputasi yang relatif rendah.
 
-- **Deep Adaptation: Melakukan unfreeze pada Block 4 dan Block 5 sehingga filter konvolusi tingkat tinggi dapat beradaptasi dengan pola atrofi otak.**
-- **Heavy Classifier: Menggunakan dua lapisan Dense besar (1024 dan 512 unit) untuk memastikan seluruh fitur visual yang diekstraksi dapat terklasifikasi dengan tepat ke dalam 4 stadium Alzheimer.**
+<ul>
+  <li><b>Pre-trained Weights</b>: ImageNet.</li>
+  <li><b>Feature Extractor</b>: Seluruh layer base model dibekukan (freeze).</li>
+  <li><b>Classifier Head</b>: GlobalAveragePooling2D, Dense 256 unit (ReLU), Dropout 0.4.</li>
+  <li><b>Output</b>: Dense Softmax 10 kelas.</li>
+</ul>
 
-### 🟩 D. Strategi Optimasi & Pelatihan
-Seluruh model dilatih menggunakan:
+<h3>🟥 C. ResNet50 (Deep Residual Network)</h3>
 
-- **Optimizer: Adam dengan learning rate yang disesuaikan (lebih rendah untuk transfer learning agar tidak merusak bobot asli).**
-- **Callbacks: - EarlyStopping: Menghentikan latih jika tidak ada perbaikan pada akurasi validasi.**
-- **ReduceLROnPlateau: Menurunkan learning rate saat model mulai jenuh untuk menemukan titik minimum loss yang lebih global.**
-- **ModelCheckpoint: Menyimpan versi terbaik dari setiap model secara otomatis.**
+ResNet50 digunakan untuk mempelajari fitur visual daun yang lebih kompleks melalui arsitektur residual network yang dalam.
+
+<ul>
+  <li><b>Pre-trained Weights</b>: ImageNet.</li>
+  <li><b>Freeze Base Model</b>: Bobot awal dikunci untuk menjaga fitur umum dari ImageNet.</li>
+  <li><b>Classifier Head</b>: GlobalAveragePooling2D, Dense 256 unit (ReLU), Dropout 0.4.</li>
+  <li><b>Output</b>: Softmax 10 kelas.</li>
+</ul>
+
+<h3>🟩 D. VGG16 (Transfer Learning)</h3>
+
+VGG16 digunakan sebagai pembanding arsitektur CNN klasik yang memiliki struktur konvolusi berurutan dan dalam.
+
+<ul>
+  <li><b>Pre-trained Weights</b>: ImageNet.</li>
+  <li><b>Freeze Layer</b>: Seluruh layer konvolusi VGG16 dibekukan.</li>
+  <li><b>Classifier</b>: Flatten, Dense 256 unit (ReLU), Dropout 0.4, Dense 128 unit (ReLU).</li>
+  <li><b>Output</b>: Softmax 10 kelas.</li>
+</ul>
+
+<h3>🟪 E. Strategi Optimasi dan Pelatihan</h3>
+
+Seluruh model dilatih menggunakan strategi pelatihan yang konsisten untuk menjaga keadilan perbandingan performa, yaitu:
+
+<ul>
+  <li><b>Optimizer</b>: Adam dengan learning rate 0.001 (Custom CNN) dan 0.0001 (Transfer Learning).</li>
+  <li><b>Loss Function</b>: Categorical Crossentropy.</li>
+  <li><b>Callback</b>: EarlyStopping untuk menghentikan pelatihan ketika performa validasi tidak meningkat.</li>
+  <li><b>Evaluation Metrics</b>: Accuracy, Classification Report, dan Confusion Matrix.</li>
+</ul>
 
 ---
 
@@ -193,20 +326,15 @@ Berikut adalah penjelasan tentang metrik yang digunakan dalam classification rep
 
 Berikut adalah perbandingan metrik evaluasi untuk setiap model:
 
-| Model & Pendekatan                | Arsitektur      | Akurasi | Precision | Recall | F1-Score |
-|-----------------------------------|-----------------|---------|-----------|--------|----------|
-| Custom CNN Baseline               | CNN             | 0.78    | 0.78      | 0.78   | 0.77     |
-| MobileNetV2 Fine-Tuning           | MobileNetV2     | 0.86    | 0.85      | 0.86   | 0.85     |
-| VGG16 Fine-Tuning                 | VGG16           | 0.84    | 0.89      | 0.84   | 0.84     |
-
-Analisis Singkat:
-
-- MobileNetV2 memberikan performa keseluruhan terbaik dengan akurasi 0.86 (86%), menunjukkan bahwa arsitektur yang ringan dengan Inverted Residuals sangat efektif untuk mengenali pola citra MRI ini.
-- VGG16 unggul dalam nilai Precision (0.89), yang berarti model ini sangat baik dalam meminimalkan kesalahan prediksi positif (sangat akurat dalam menentukan stadium tertentu tanpa banyak salah tebak).
-- Custom CNN berfungsi sebagai baseline yang cukup solid dengan akurasi 0.78, namun masih di bawah performa model Transfer Learning yang memiliki pengetahuan awal dari ImageNet.
+| Model & Pendekatan  | Arsitektur  | Akurasi (%) | Precision (%) | Recall (%) | F1-Score (%) | Hasil Analisis                                                                                                                                                                                          |
+| ------------------- | ----------- | ----------- | ------------- | ---------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Custom CNN Baseline | CNN Manual  | 78.31       | 79.06         | 78.31      | 78.38        | Model baseline mampu mempelajari pola dasar daun herbal dengan cukup baik, namun masih terbatas dalam menangkap fitur kompleks sehingga performanya berada di bawah model transfer learning.            |
+| MobileNetV2         | MobileNetV2 | 98.16       | 98.20         | 98.16      | 98.15        | Menunjukkan performa terbaik secara keseluruhan. Arsitektur yang efisien dan bobot pre-trained ImageNet sangat efektif dalam mengekstraksi fitur daun herbal dengan tingkat akurasi yang sangat tinggi. |
+| ResNet50            | ResNet50    | 68.93       | 70.15         | 68.93      | 69.16        | Performa relatif rendah dibandingkan model lain. Hal ini kemungkinan disebabkan oleh kompleksitas model yang tinggi sehingga kurang optimal pada dataset berukuran terbatas tanpa fine-tuning lanjutan. |
+| VGG16               | VGG16       | 95.77       | 95.79         | 95.77      | 95.75        | Memberikan performa yang sangat baik dengan kemampuan menangkap detail tekstur daun. Namun, kebutuhan parameter yang besar membuatnya sedikit kurang efisien dibandingkan MobileNetV2.                  |
 
 <h2><b>Confusion Matrix 🔴🟢</b></h2>
-<p>Di bawah ini adalah confusion matrix untuk 3 model.</p>
+<p>Di bawah ini adalah confusion matrix untuk setiap model.</p>
 
 <table align="center">
   <tr>
@@ -217,6 +345,10 @@ Analisis Singkat:
     <td align="center">
       <b>MobileNetV2</b><br>
       <img src="assets/images/Confusion_Matrix_MobileNetV2.PNG" width="350px">
+    </td>
+    <td align="center">
+      <b>VGG16</b><br>
+      <img src="assets/images/Confusion_Matrix_ResNet50.PNG" width="350px">
     </td>
     <td align="center">
       <b>VGG16</b><br>
@@ -237,6 +369,10 @@ Analisis Singkat:
     <td align="center">
       <b>MobileNetV2 Learning Curve</b><br>
       <img src="assets/images/Grafik_MobileNetV2.PNG" width="350px">
+    </td>
+    <td align="center" colspan="2">
+      <b>ResNet50 Learning Curve</b><br>
+      <img src="assets/images/Grafik_ResNet50.PNG" width="350px">
     </td>
     <td align="center" colspan="2">
       <b>VGG16 Learning Curve</b><br>
