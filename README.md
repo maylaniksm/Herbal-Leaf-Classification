@@ -1,5 +1,4 @@
 <h1 align="center">Herbal Leaf Classification</h1>
----
 <p align="center">
   <img src="assets/images/cover.avif" width="70%">
 </p>
@@ -7,9 +6,6 @@
 <p align="center">
   Sumber Image : <a href="https://www.freepik.com/free-photos-vectors/herbal-leaves">Access Here</a>
 </p>
-
----
-
 <h1 align="center">📑 Table of Contents 📑</h1>
 
 - [Deskripsi Proyek](#deskripsi-proyek)
