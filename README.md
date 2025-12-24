@@ -346,7 +346,7 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
 
   <tr>
     <td align="center">
-      <b>VGG16</b><br>
+      <b>ResNet50</b><br>
       <img src="assets/images/Confusion_Matrix_ResNet50.png" width="350px">
     </td>
     <td align="center">
