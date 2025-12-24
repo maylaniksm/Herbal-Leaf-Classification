@@ -16,6 +16,7 @@
   - [Preprocessing Data](#preprocessing-data)
   - [Pemodelan](#pemodelan)
 - [Hasil & Evaluasi](#hasil--evaluasi)
+- [Langkah Instalasi](#instalasi)
 - [Dashboard](#dashboard)
 
 ---
@@ -398,7 +399,34 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
     </td>
   </tr>
 </table>
+---
+<h1 id="instalasi" align="center">🔧 Langkah Instalasi 🔧</h1>
 
+### Software Utama
+Proyek ini dapat dijalankan menggunakan **Google Colab** atau **VS Code**. Pastikan **Python 3.10** atau **3.11** telah terinstal di sistem Anda.
+
+### Dependensi
+Seluruh library yang diperlukan telah disediakan dalam file `requirements.txt`. Anda dapat menginstalnya dengan salah satu cara berikut:
+
+#### Cara 1: Instalasi Langsung (Direkomendasikan)
+Jalankan perintah berikut di terminal:
+```bash
+pip install -r requirements.txt
+```
+
+#### Cara 2: Instalasi Manual
+Jika ingin menginstal satu per satu (misal Pip), lakukan cara yang sama untuk install library yang lainnya:
+```bash
+pip install tensorflow==2.19.0
+pip install keras==3.10.0
+```
+
+#### Menjalankan Sistem Prediksi
+Untuk menjalankan dashboard sistem prediksi di lokal, buka terminal dan jalankan perintah berikut:
+```bash
+streamlit run app.py
+```
+---
 <h1 id="dashboard" align="center">🌿 Herbal Leaf Classification Dashboard 🌿</h1>
 
 <p align="center">
