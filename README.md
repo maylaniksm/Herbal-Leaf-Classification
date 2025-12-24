@@ -1,7 +1,7 @@
 <h1 align="center">Herbal Leaf Classification</h1>
 ---
 <p align="center">
-  <img src="assets/images/cover.AVIF" width="70%">
+  <img src="assets/images/cover.avif" width="70%">
 </p>
 
 <p align="center">
@@ -340,7 +340,7 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
   <tr>
     <td align="center">
       <b>CNN Baseline</b><br>
-      <img src="assets/images/Confusion_Matrix_CNN.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_CNN.png" width="350px">
     </td>
     <td align="center">
       <b>MobileNetV2</b><br>
