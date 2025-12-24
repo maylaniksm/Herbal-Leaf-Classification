@@ -1,15 +1,11 @@
 <h1 align="center">Herbal Leaf Classification</h1>
----
 <p align="center">
-  <img src="assets/images/cover.AVIF" width="70%">
+  <img src="assets/images/cover.avif" width="70%">
 </p>
 
 <p align="center">
   Sumber Image : <a href="https://www.freepik.com/free-photos-vectors/herbal-leaves">Access Here</a>
 </p>
-
----
-
 <h1 align="center">📑 Table of Contents 📑</h1>
 
 - [Deskripsi Proyek](#deskripsi-proyek)
@@ -184,7 +180,7 @@ Dataset ini mencakup 10 kelas daun herbal berikut:
 
 <ul>
   <li>
-    <b>Data Augmentation</b>: Untuk memenuhi kebutuhan jumlah data dan meningkatkan kemampuan generalisasi model, dilakukan proses augmentasi citra menggunakan teknik rotasi, pergeseran (width & height shift), zoom, shear, dan horizontal flip. Proses ini memperluas dataset hingga lebih dari <b>5.500 citra</b>.
+    <b>Data Augmentation</b>: Untuk memenuhi kebutuhan jumlah data dan meningkatkan kemampuan generalisasi model, dilakukan proses augmentasi citra menggunakan teknik rotasi, pergeseran (width & height shift), zoom, shear, dan horizontal flip. Proses ini memperluas dataset hingga <b>5.500 citra</b>.
   </li>
   <br>
 
@@ -221,7 +217,7 @@ Proses utama pada tahap preprocessing meliputi:
 
 <ul>
   <li>
-    <b>Data Augmentation</b>: Untuk meningkatkan jumlah data dan memperkaya variasi citra, diterapkan teknik augmentasi seperti rotasi, pergeseran horizontal dan vertikal, zoom, shear, dan horizontal flip. Proses ini dilakukan secara <i>offline</i> hingga jumlah dataset mencapai lebih dari 5.500 citra.
+    <b>Data Augmentation</b>: Untuk meningkatkan jumlah data dan memperkaya variasi citra, diterapkan teknik augmentasi seperti rotasi, pergeseran horizontal dan vertikal, zoom, shear, dan horizontal flip. Proses ini dilakukan secara <i>offline</i> hingga jumlah dataset mencapai 5.500 citra.
   </li>
   <br>
 
@@ -340,19 +336,22 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
   <tr>
     <td align="center">
       <b>CNN Baseline</b><br>
-      <img src="assets/images/Confusion_Matrix_Baseline.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_CNN.png" width="350px">
     </td>
     <td align="center">
       <b>MobileNetV2</b><br>
-      <img src="assets/images/Confusion_Matrix_MobileNetV2.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_MobileNetV2.png" width="350px">
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <b>VGG16</b><br>
+      <img src="assets/images/Confusion_Matrix_ResNet50.png" width="350px">
     </td>
     <td align="center">
       <b>VGG16</b><br>
-      <img src="assets/images/Confusion_Matrix_ResNet50.PNG" width="350px">
-    </td>
-    <td align="center">
-      <b>VGG16</b><br>
-      <img src="assets/images/Confusion_Matrix_VGG16.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_VGG16.png" width="350px">
     </td>
   </tr>
 </table>
@@ -364,82 +363,146 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
   <tr>
     <td align="center">
       <b>CNN Learning Curve</b><br>
-      <img src="assets/images/Grafik_CNN.PNG" width="350px">
+      <img src="assets/images/Grafik_CNN.png" width="350px">
     </td>
     <td align="center">
       <b>MobileNetV2 Learning Curve</b><br>
-      <img src="assets/images/Grafik_MobileNetV2.PNG" width="350px">
+      <img src="assets/images/Grafik_MobileNetV2.png" width="350px">
     </td>
+  </tr>
+
+  <tr>
     <td align="center" colspan="2">
       <b>ResNet50 Learning Curve</b><br>
-      <img src="assets/images/Grafik_ResNet50.PNG" width="350px">
+      <img src="assets/images/Grafik_ResNet50.png" width="350px">
     </td>
     <td align="center" colspan="2">
       <b>VGG16 Learning Curve</b><br>
-      <img src="assets/images/Grafik_VGG16.PNG" width="350px">
+      <img src="assets/images/Grafik_VGG16.png" width="350px">
     </td>
   </tr>
 </table>
 
-<h1 id="dashboard" align="center">🧠 Alzheimer Disease Stage Diagnostics 🧠</h1>
+<h2><b>Visualisasi Perbandingan 📊</b></h2>
+<p>Berikut adalah visualisasi perbandingan untuk setiap model.</p>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>Bar Chart Perbandingan Akurasi Model</b><br>
+      <img src="assets/images/Perbandingan_Akurasi.png" width="350px">
+    </td>
+    <td align="center">
+      <b>Bar Chart Perbandingan Presisi Recall F1-Score</b><br>
+      <img src="assets/images/Perbandingan_PRF1.png" width="350px">
+    </td>
+  </tr>
+</table>
+
+<h1 id="dashboard" align="center">🌿 Herbal Leaf Classification Dashboard 🌿</h1>
 
 <p align="center">
-  <a href="https://alzheimer-brain-mri-classification.streamlit.app/" target="_blank">
+  <a href="https://herbal-leaf-classification.streamlit.app/" target="_blank">
     <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Streamlit App">
   </a>
 </p>
 
 <p align="center">
   <strong>Live Demo:</strong> 
-  <a href="https://alzheimer-brain-mri-classification.streamlit.app/">alzheimer-brain-mri-classification.streamlit.app</a>
+  <a href="https://herbal-leaf-classification.streamlit.app/">herbal-leaf-classification.streamlit.app</a>
 </p>
 
-**GrowthVision AI** adalah sistem berbasis web yang dirancang untuk melakukan klasifikasi morfologi wajah pada anak guna mendukung analisis pertumbuhan pediatrik. Proyek ini memanfaatkan teknologi *Deep Learning* dengan arsitektur **CNN** dan **EfficientNet-B0** yang dioptimalkan menggunakan teknik **LoRA (Low-Rank Adaptation)**.
+<p align="center">
+  <strong>Web Dashboard:</strong><br>
+  Aplikasi interaktif berbasis <i>Streamlit</i> untuk menguji dan membandingkan performa
+  model Deep Learning dalam mengklasifikasikan jenis daun herbal Indonesia.
+</p>
+
+## 🧠 Deskripsi Dashboard
+
+<b>Herbal Leaf Classification Dashboard</b> adalah aplikasi berbasis web yang dirancang untuk
+melakukan identifikasi otomatis jenis daun herbal Indonesia menggunakan citra digital.
+Aplikasi ini memanfaatkan model Deep Learning yang telah dilatih sebelumnya dan disimpan
+dalam format <code>.keras</code>.
+
+Dashboard ini memungkinkan pengguna untuk:
+- Menguji satu model tertentu secara individual
+- Membandingkan hasil prediksi dari seluruh model secara bersamaan
+- Melakukan klasifikasi pada satu atau banyak gambar (batch upload)
+
+Model yang tersedia dalam sistem ini meliputi:
+- <b>CNN Manual</b>
+- <b>MobileNetV2</b>
+- <b>ResNet50</b>
+- <b>VGG16</b>
 
 ---
 
 ## 🚀 Fitur Utama
-- **Batch Processing**: Mampu melakukan analisis hingga 20 subjek secara acak sekaligus.
-- **Inference Models**: Pilihan arsitektur model antara EfficientNet + LoRA, CNN Fine-Tuning, atau SVM Klasik.
-- **Visualisasi Real-time**: Hasil prediksi dilengkapi dengan *Confidence Score* menggunakan Gauge Chart interaktif.
-- **Export Data**: Pengguna dapat mengunduh hasil analisis dalam format CSV untuk keperluan statistik lebih lanjut.
+- **Single Model Testing**  
+  Menguji satu arsitektur model pilihan (CNN, MobileNetV2, ResNet50, atau VGG16) terhadap gambar daun herbal yang diunggah.
+
+- **Multi-Model Evaluation**  
+  Menampilkan hasil prediksi dari seluruh model secara paralel untuk satu gambar yang sama, sehingga memudahkan analisis perbandingan performa.
+
+- **Batch Image Upload**  
+  Mendukung unggah banyak gambar sekaligus dan menampilkan hasil klasifikasi untuk setiap gambar secara terpisah.
+
+- **Confidence Score Visualization**  
+  Menampilkan tingkat kepercayaan prediksi dalam bentuk persentase dan progress bar.
+
+- **User-Friendly Interface**  
+  Antarmuka sederhana dengan sidebar navigasi untuk memudahkan pengguna dalam melakukan eksperimen model.
 
 ---
 
 ## 🛠️ Cara Menggunakan Dashboard
 
-### 1. Memilih Sumber Data
-Terdapat dua metode input pada panel kiri (Sidebar):
-* **Sampel Acak GitHub**: Sistem akan mengambil 20 gambar secara acak dari dataset penelitian yang tersimpan di folder `samples`.
-* **Upload Manual**: Pengguna dapat mengunggah foto subjek sendiri (format .jpg, .png, atau .jpeg).
+### 1️⃣ Upload Gambar
+- Unggah satu atau beberapa gambar daun herbal melalui menu <b>Upload Center</b> di sidebar.
+- Format file yang didukung: <code>.jpg</code>, <code>.jpeg</code>, dan <code>.png</code>.
 
-### 2. Menjalankan Analisis
-* Pilih arsitektur model yang diinginkan pada menu drop-down.
-* Klik tombol **🚀 RUN INFERENCE**.
-* Tunggu hingga progress bar mencapai 100%.
+### 2️⃣ Pilih Mode Analisis
+- <b>Uji Single Model</b>  
+  Pilih satu arsitektur model untuk melakukan klasifikasi.
+- <b>Evaluasi Seluruh Model</b>  
+  Menampilkan hasil prediksi dari seluruh model sekaligus untuk perbandingan langsung.
 
-### 3. Membaca Hasil
-* **Classification Summary**: Ringkasan total jumlah subjek yang terdeteksi sebagai **VP-0 (Proportional)** dan **VP-1 (Linear)**.
-* **Individual Analysis**: Detail hasil per gambar lengkap dengan persentase keyakinan model.
-* **Download Report**: Klik tombol unduh di bagian bawah untuk menyimpan tabel hasil.
+### 3️⃣ Jalankan Analisis
+- Sistem akan memproses gambar (resize 224×224 dan normalisasi).
+- Model akan melakukan inferensi dan menghasilkan label daun herbal beserta confidence score.
+
+### 4️⃣ Interpretasi Hasil
+- <b>Jenis Daun Teridentifikasi</b>: Kelas daun dengan probabilitas tertinggi.
+- <b>Confidence Score</b>: Tingkat keyakinan model terhadap prediksi yang dihasilkan.
+- Pada mode evaluasi, setiap model ditampilkan dalam panel terpisah untuk memudahkan perbandingan.
 
 ---
 
 ## 📂 Struktur Repositori
 - `app.py`: File utama aplikasi Streamlit.
-- `samples/`: Folder berisi dataset gambar sampel untuk demo.
-- `requirements.txt`: Daftar library Python yang dibutuhkan (PyTorch, Streamlit, Plotly, dll).
+- `models/`: Folder berisi model-model yang sudah dilatih.
+- `requirements.txt`: Daftar library Python yang dibutuhkan.
 - `README.md`: Dokumentasi proyek.
 
 ---
 
-## 🔬 Metodologi & Riset
-Sistem ini dikembangkan sebagai bagian dari tugas besar mata kuliah **Machine Learning**. Fokus riset ini adalah mengimplementasikan teknik *transfer learning* dan efisiensi model melalui **LoRA** untuk mengenali fitur morfologi wajah yang berkaitan dengan pola pertumbuhan (Visual Proxy) pada anak-anak.
+## 🔬 Metodologi & Implementasi
+Aplikasi ini memuat model Deep Learning yang telah dilatih sebelumnya menggunakan dataset
+<i>Indonesian Herb Leaf Dataset 3500</i> yang telah melalui proses data augmentation.
+Setiap gambar input diproses dengan:
+- Konversi ke RGB
+- Resize ke 224×224 piksel
+- Normalisasi nilai piksel ke rentang [0,1]
+
+Inferensi dilakukan menggunakan TensorFlow/Keras tanpa proses training ulang di sisi aplikasi.
 
 ---
 
 ## ⚖️ Lisensi
-Proyek ini didistribusikan di bawah **MIT License**. Data yang digunakan dalam demo ini bertujuan untuk kepentingan edukasi dan riset teknologi *screening* awal non-medis.
+Proyek ini dikembangkan untuk keperluan edukasi dan penelitian akademik.
+Seluruh dataset dan model digunakan khusus untuk eksperimen klasifikasi citra daun herbal
+dan tidak ditujukan sebagai sistem identifikasi botani medis resmi.
 
 ---
-**© 2024 | Machine Learning**
+**© 2025 | Machine Learning**
