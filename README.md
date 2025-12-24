@@ -340,7 +340,7 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
   <tr>
     <td align="center">
       <b>CNN Baseline</b><br>
-      <img src="assets/images/Confusion_Matrix_Baseline.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_CNN.PNG" width="350px">
     </td>
     <td align="center">
       <b>MobileNetV2</b><br>
