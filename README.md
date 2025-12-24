@@ -1,7 +1,7 @@
 <h1 align="center">Herbal Leaf Classification</h1>
 ---
 <p align="center">
-  <img src="assets/images/cover.webp" width="70%">
+  <img src="assets/images/cover.AVIF" width="70%">
 </p>
 
 <p align="center">
