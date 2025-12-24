@@ -372,11 +372,11 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
   </tr>
 
   <tr>
-    <td align="center" colspan="2">
+    <td align="center">
       <b>ResNet50 Learning Curve</b><br>
       <img src="assets/images/Grafik_ResNet50.png" width="350px">
     </td>
-    <td align="center" colspan="2">
+    <td align="center">
       <b>VGG16 Learning Curve</b><br>
       <img src="assets/images/Grafik_VGG16.png" width="350px">
     </td>
