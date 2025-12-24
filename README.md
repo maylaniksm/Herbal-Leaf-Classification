@@ -344,15 +344,15 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
     </td>
     <td align="center">
       <b>MobileNetV2</b><br>
-      <img src="assets/images/Confusion_Matrix_MobileNetV2.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_MobileNetV2.png" width="350px">
     </td>
     <td align="center">
       <b>VGG16</b><br>
-      <img src="assets/images/Confusion_Matrix_ResNet50.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_ResNet50.png" width="350px">
     </td>
     <td align="center">
       <b>VGG16</b><br>
-      <img src="assets/images/Confusion_Matrix_VGG16.PNG" width="350px">
+      <img src="assets/images/Confusion_Matrix_VGG16.png" width="350px">
     </td>
   </tr>
 </table>
@@ -364,19 +364,19 @@ Berikut adalah perbandingan metrik evaluasi untuk setiap model:
   <tr>
     <td align="center">
       <b>CNN Learning Curve</b><br>
-      <img src="assets/images/Grafik_CNN.PNG" width="350px">
+      <img src="assets/images/Grafik_CNN.png" width="350px">
     </td>
     <td align="center">
       <b>MobileNetV2 Learning Curve</b><br>
-      <img src="assets/images/Grafik_MobileNetV2.PNG" width="350px">
+      <img src="assets/images/Grafik_MobileNetV2.png" width="350px">
     </td>
     <td align="center" colspan="2">
       <b>ResNet50 Learning Curve</b><br>
-      <img src="assets/images/Grafik_ResNet50.PNG" width="350px">
+      <img src="assets/images/Grafik_ResNet50.png" width="350px">
     </td>
     <td align="center" colspan="2">
       <b>VGG16 Learning Curve</b><br>
-      <img src="assets/images/Grafik_VGG16.PNG" width="350px">
+      <img src="assets/images/Grafik_VGG16.png" width="350px">
     </td>
   </tr>
 </table>
