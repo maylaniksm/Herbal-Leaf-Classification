@@ -1,4 +1,4 @@
-<h1 align="center">🌿 Herbal Leaf Classification</h1>
+<h1 align="center">🌿 Herbal Leaf Classification 🌿</h1>
 <p align="center"><i>Deep Learning–Based Plant Leaf Image Classification</i></p>
 
 <p align="center">
